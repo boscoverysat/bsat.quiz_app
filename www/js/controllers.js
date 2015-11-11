@@ -1,6 +1,6 @@
-var app = angular.module('starter.controllers', [])
+var starterctrls = angular.module('starter.controllers', []);
 
-app.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+starterctrls.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -41,7 +41,7 @@ app.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
   };
 })
 
-app.controller('PlaylistsCtrl', function($scope) {
+starterctrls.controller('PlaylistsCtrl', function($scope) {
   $scope.playlists = [
     { title: 'Reggae', id: 1 },
     { title: 'Chill', id: 2 },
@@ -52,5 +52,5 @@ app.controller('PlaylistsCtrl', function($scope) {
   ];
 })
 
-app.controller('PlaylistCtrl', function($scope, $stateParams) {
+starterctrls.controller('PlaylistCtrl', function($scope, $stateParams) {
 });

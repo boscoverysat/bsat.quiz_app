@@ -1,61 +1,59 @@
-app.controller('ScoreCtrl', function($scope) {
+// app.controller('ScoreCtrl', function(myService) {
+app.controller('ScoreCtrl', ['myService', 'chartService', function(myService, chartService) {
   console.log('Cargando gráfica');
 
-  var div1=d3.select(document.getElementById('div1'));
-  // var div2=d3.select(document.getElementById('div2'));
-  // var div3=d3.select(document.getElementById('div3'));
-  // var div4=d3.select(document.getElementById('div4'));
+  myService.sayHello();
 
-  $scope.onClick1 = function() {
-    deselect();
-    div1.attr("class","selectedRadial");
-  };
+  chartService.drawChart();
 
-  // function onClick2() {
+  // $scope.onClick1 = function() {
   //   deselect();
-  //   div2.attr("class","selectedRadial");
-  // }
+  //   div1.attr("class","selectedRadial");
+  // };
 
-  // function onClick3() {
-  //   deselect();
-  //   div3.attr("class","selectedRadial");
-  // }
+  // $scope.labelFunction = function(val,min,max) {
 
-  $scope.labelFunction = function(val,min,max) {
+  // };
 
-  };
+  // $scope.deselect = function() {
+  //   div1.attr("class","radial");
+  // };
 
-  $scope.deselect = function() {
-    div1.attr("class","radial");
-    // div2.attr("class","radial");
-    // div3.attr("class","radial");
-  };
+  // this.start = function() {
+  //   console.log('Running start()');
 
-  $scope.start = function() {
-    var rp1 = radialProgress(document.getElementById('div1'))
-            .label("RADIAL 1")
-            // .onClick($scope.onClick1)
-            .diameter(150)
-            .value(78)
-            .render();
-  };
+  //   var data = [
+  //     {
+  //       value: 300,
+  //       color:"#F7464A",
+  //       highlight: "#FF5A5E",
+  //       label: "Red"
+  //     },
+  //     {
+  //       value: 50,
+  //       color: "#46BFBD",
+  //       highlight: "#5AD3D1",
+  //       label: "Green"
+  //     },
+  //     {
+  //       value: 100,
+  //       color: "#FDB45C",
+  //       highlight: "#FFC870",
+  //       label: "Yellow"
+  //     }
+  //   ];
 
-  // var rp2 = radialProgress(document.getElementById('div2'))
-  //         .label("RADIAL 2")
-  //         .onClick(onClick2)
-  //         .diameter(150)
-  //         .value(132)
-  //         .render();
+  //   if (myNewChart) {
+  //     console.log('Existe el chart');
+  //     myNewChart.destroy();
+  //   }
+  //   else {
+  //     console.log('NO Existe el chart');
+  //   }
 
-  // var rp3 = radialProgress(document.getElementById('div3'))
-  //         .label("RADIAL 3")
-  //         .onClick(onClick3)
-  //         .diameter(150)
-  //         .minValue(100)
-  //         .maxValue(200)
-  //         .value(150)
-  //         .render();
-  // }
+  //   var ctx = document.getElementById("scoreChart").getContext("2d");
+  //   var myNewChart = new Chart(ctx).Doughnut(data);
+  // };
 
-  $scope.start();
-});
+  // this.start();
+}]);
