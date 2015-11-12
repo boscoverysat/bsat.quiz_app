@@ -1,1 +1,16 @@
-/* Empty. Add your own CSS if you like */
+// Menu styles
+.menu-items i {
+  font-size: 1.5em;
+  margin-right: 10px;
+}
+
+// Introduction styles
+.introduction-screen img {
+  width: 200px !important;
+  height: 200px;
+  /*padding-left: 0;
+  padding-right: 0;
+  margin-left: auto;
+  margin-right: auto;*/
+  background-color: red;
+}

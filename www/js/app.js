@@ -48,6 +48,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
       }
     })
     .state('app.score', {
+      cache: false,
       url: '/score',
       views: {
         'menuContent': {
