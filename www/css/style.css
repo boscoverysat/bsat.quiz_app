@@ -4,13 +4,22 @@
   margin-right: 10px;
 }
 
-// Introduction styles
-.introduction-screen img {
-  width: 200px !important;
-  height: 200px;
-  /*padding-left: 0;
-  padding-right: 0;
-  margin-left: auto;
-  margin-right: auto;*/
-  background-color: red;
+.muted-text {
+  color: #669 !important;
+}
+
+// Introduction screen
+.introduction-screen-logo {
+  padding-top: 30px !important;
+  padding-bottom: 60px !important;
+}
+
+.introduction-screen-logo img {
+  width: 100% !important;
+}
+
+// Quiz screen
+.quiz-question,
+.score-title {
+  margin-bottom: 40px !important;
 }
