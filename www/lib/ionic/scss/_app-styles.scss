@@ -9,6 +9,10 @@
 }
 
 // Introduction screen
+.introduction-screen h2:first-child {
+  margin-top: 40px !important;
+}
+
 .introduction-screen-logo {
   padding-top: 30px !important;
   padding-bottom: 60px !important;
@@ -22,4 +26,13 @@
 .quiz-question,
 .score-title {
   margin-bottom: 40px !important;
+}
+
+.quiz-header-scores {
+  margin-bottom: 30px;
+  font-size: 1.2em;
+}
+
+.quiz-header-scores i {
+  margin-right: 15px;
 }
