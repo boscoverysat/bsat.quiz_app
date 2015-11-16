@@ -40,10 +40,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
       }
     })
     .state('app.quiz', {
+      cache: false,
       url: '/quiz',
       views: {
         'menuContent': {
-          templateUrl: 'templates/quiz.html'
+          templateUrl: 'templates/quiz.html',
+          controller: 'QuestionsController'
         }
       }
     })

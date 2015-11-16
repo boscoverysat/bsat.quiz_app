@@ -1,19 +1,54 @@
 app.service('questionsService', function(){
-  this.questions = {
 
+  this.getQuestion = function() {
+    var questionIndex = Math.floor(Math.random() * this.questions.length);
+
+    console.log('questionIndex: ' + questionIndex);
+
+    return this.questions[questionIndex];
   };
+
+  this.getQuestions = function() {
+    return this.questions;
+  };
+
+  this.questions = [
+    {
+      id: 1,
+      question: "¿Es cierto que en el espacio no hay gravedad?",
+      answer1: {
+        answer: "No, es falso.",
+        correct: true
+      },
+      answer2: {
+        answer: "Sí, es cierto.",
+        correct: false
+      },
+      explanation: "¿Cuerpos flotando? No hay duda, en el espacio no hay gravedad ¿Cierto? ¡Error! La famosa Ley de la Gravitación Universal de sir Isaac Newton dice: \"Dos masas cualesquiera (m1, m2) se atraen con una fuerza proporcional (F) al producto de sus masas e inversamente proporcional al cuadrado de las distancias (r) que las separan.\" La fuerza gravitatoria se hace nula solo cuando la distancia entre dichas masas es infinita. No obstante el concepto de infinito es problemático cuando se traslada a la realidad, pues nunca seremos capaces de separar dos masas infinitamente, luego la fuerza gravitatoria nunca será 0. Se concluye así que el alcance de la gravedad es ilimitado, llega a todas partes; eso sí con una intensidad que varía según el cuadrado de la distancia. Como curiosidad: la gravedad a 400 Km de la superficie terrestre (donde se encuentra la ISS) es de tan solo un 10% menor que la que experimentamos habitualmente."
+    },
+    {
+      id: 1,
+      question: "¿Qué satelite orbita alrededor de la tierra?",
+      answer1: {
+        answer: "La Luna",
+        correct: true
+      },
+      answer2: {
+        answer: "El Sol",
+        correct: false
+      },
+      explanation: "La luna ya que es el único satélite natural de la Tierea y gira alrededor de su eje (rotación) en aproximadamente 27,32 días."
+    }
+  ];
 });
 
 /*
 
-¿Es cierto que en el espacio no hay gravedad? No, es falso, en el espacio sí hay gravedad.  Sí, es cierto, en el espacio no hay gravedad. "¿Cuerpos flotando? No hay duda, en el espacio no hay gravedad ¿Cierto? ¡Error!
 
-La famosa Ley de la Gravitación Universal de sir Isaac Newton dice:
 
-""Dos masas cualesquiera (m1, m2) se atraen con una fuerza proporcional (F) al producto de sus masas e inversamente proporcional al cuadrado de las distancias (r) que las separan.""
 
-La fuerza gravitatoria se hace nula solo cuando la distancia entre dichas masas es infinita. No obstante el concepto de infinito es problemático cuando se traslada a la realidad, pues nunca seremos capaces de separar dos masas infinitamente, luego la fuerza gravitatoria nunca será 0. Se concluye así que el alcance de la gravedad es ilimitado, llega a todas partes; eso sí con una intensidad que varía según el cuadrado de la distancia. Como curiosidad: la gravedad a 400 Km de la superficie terrestre (donde se encuentra la ISS) es de tan solo un 10% menor que la que experimentamos habitualmente."  Medio
-¿satelite que orbita arededor de la tierra? La luna El sol  "La luna ya que es el unico satelite natural de la tierea , y gira alrededor de su eje (rotación) en aproximadamente 27.32dias .
+
+""
 " Fácil
 
 ¿Qué país lanzó el Sputnik? Unión Soviética Estados Unidos  La nave Sputnik 1 fue el primer intento no fallido de poner en órbita un satélite artificial alrededor de la Tierra. Se lanzó desde el Cosmódromo de Baikonur en Tyuratam, en Kazajistán, antes parte de la Unión Soviética Fácil
@@ -34,5 +69,3 @@ La fuerza gravitatoria se hace nula solo cuando la distancia entre dichas masas 
 ¿Cuál fue el primer satelite artificial Americano?  El Explorer,  El Challenger.  Fue lanzado a las 22:48 horas del 31 de enero de 1958.  Medio
 
 */
-
-});

@@ -12,15 +12,25 @@
       </div>
     </div>
     <div class="row quiz-question">
-      <h3>Pregunta</h3>
+      <h3>{{question}}</h3>
     </div>
-    <button class="button button-outline button-block button-light">
-      <span class="dark">Respuesta 1</span>
+    <button class="button button-outline button-block button-light"
+            ng-click="checkAnswer({{answer1correct}})"
+            ng-if="showAnswerButton">
+      <span class="dark">{{answer1}}</span>
     </button>
-    <button class="button button-outline button-block button-light">
-      <span class="dark">Respuesta 2</span>
+    <button class="button button-outline button-block button-light"
+            ng-click="checkAnswer({{answer2correct}})"
+            ng-if="showAnswerButton">
+      <span class="dark">{{answer2}}</span>
     </button>
-    <button class="button button-outline button-block button-positive icon-right ion-chevron-right">
+    <div ng-if="showExplanation">
+      <div class="row text-center"><h3>{{resultMessage}}</h3></div>
+      <div class="row text-justified">
+        <p>{{explanation}}</p>
+      </div>
+    </div>
+    <button class="button button-outline button-block button-positive icon-right ion-chevron-right" ng-click="getNextQuestion()">
       <span>Siguiente pregunta</span>
     </button>
   </ion-content>
