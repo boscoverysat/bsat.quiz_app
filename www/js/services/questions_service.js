@@ -1,4 +1,5 @@
 app.service('questionsService', function(){
+  'use strict';
 
   this.getQuestion = function() {
     var questionIndex = Math.floor(Math.random() * this.questions.length);

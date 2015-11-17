@@ -1,14 +1,6 @@
 app.controller('QuestionsController', ['$scope', 'questionsService', function($scope, questionsService) {
   'use strict';
 
-  var localQuestion;
-
-  // Question counters.
-  $scope.correctQuestions = 0;
-  $scope.wrongQuestions = 0;
-  $scope.totalQuestions = 0;
-  $scope.totalTime;
-
   $scope.checkAnswer = function(isCorrect) {
     if (isCorrect) {
       console.log('La respuesta es CORRECTA');
@@ -40,9 +32,23 @@ app.controller('QuestionsController', ['$scope', 'questionsService', function($s
     // TODO: Guardar en BBDD.
   };
 
+  $scope.getCorrectQuestions = function() {
+    // TODO: Obtener candidad desde BBDD.
+    return 0;
+  };
+
+  $scope.getWrongQuestions = function() {
+    return 0;
+    // TODO: Obtener candidad desde BBDD.
+  };
+
+  $scope.getTotalQuestions = function() {
+    return 0;
+    // TODO: Obtener candidad desde BBDD.
+  };
 
   $scope.getNextQuestion = function() {
-    localQuestion = questionsService.getQuestion();
+    var localQuestion = questionsService.getQuestion();
 
     $scope.showAnswerButton = true;
     $scope.showExplanation = false;
@@ -59,5 +65,11 @@ app.controller('QuestionsController', ['$scope', 'questionsService', function($s
     $scope.answer2correct = !randomResult;
   };
 
-  $scope.getNextQuestion();
+  $scope.$on('$ionicView.beforeEnter', function(event) {
+    $scope.getNextQuestion();
+
+    $scope.correctQuestions = $scope.getCorrectQuestions();
+    $scope.wrongQuestions = $scope.getWrongQuestions();
+    $scope.totalQuestions = $scope.getTotalQuestions();
+  });
 }]);
