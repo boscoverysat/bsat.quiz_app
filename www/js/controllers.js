@@ -9,9 +9,6 @@ starterctrls.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
-  // Form data for the login modal
-  $scope.loginData = {};
-
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
     scope: $scope

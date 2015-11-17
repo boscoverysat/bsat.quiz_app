@@ -55,7 +55,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
       views: {
         'menuContent': {
           templateUrl: 'templates/score.html',
-          controller: 'ScoreCtrl'
+          controller: ['ScoreCtrl', 'QuestionsController']
         }
       }
     })

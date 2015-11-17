@@ -3,21 +3,43 @@ app.controller('QuestionsController', ['$scope', 'questionsService', function($s
 
   var localQuestion;
 
+  // Question counters.
+  $scope.correctQuestions = 0;
+  $scope.wrongQuestions = 0;
+  $scope.totalQuestions = 0;
+  $scope.totalTime;
+
   $scope.checkAnswer = function(isCorrect) {
     if (isCorrect) {
       console.log('La respuesta es CORRECTA');
-      // TODO: Incrementar el contador de preguntas acertadas.
+      $scope.increaseCorrectQuestions();
       $scope.resultMessage = "Enhorabuena !!!";
     } else {
       console.log('La respuesta es INCORRECTA');
-      // TODO: Incrementar el contador de preguntas erradas.
+      $scope.increaseWrongQuestions();
       $scope.resultMessage = "Inténtalo de nuevo.";
     }
 
     $scope.showAnswerButton = false;
-    // TODO: Incrementar el contador de preguntas realizadas.
+    $scope.increaseTotalQuestions();
     $scope.showExplanation = true;
   };
+
+  $scope.increaseCorrectQuestions = function() {
+    $scope.correctQuestions++;
+    // TODO: Guardar en BBDD.
+  };
+
+  $scope.increaseWrongQuestions = function() {
+    $scope.wrongQuestions++;
+    // TODO: Guardar en BBDD.
+  };
+
+  $scope.increaseTotalQuestions = function() {
+    $scope.totalQuestions++;
+    // TODO: Guardar en BBDD.
+  };
+
 
   $scope.getNextQuestion = function() {
     localQuestion = questionsService.getQuestion();
@@ -27,14 +49,14 @@ app.controller('QuestionsController', ['$scope', 'questionsService', function($s
     $scope.resultMessage = "";
 
     $scope.question = localQuestion.question;
-    $scope.answer1 = localQuestion.answer1.answer;
-    $scope.answer2 = localQuestion.answer2.answer;
     $scope.explanation = localQuestion.explanation;
 
-    // TODO: Determinar mediante random, cuál será la 1ª y cuál la 2ª.
-    $scope.answer1correct = localQuestion.answer1.correct;
-    $scope.answer2correct = localQuestion.answer2.correct;
+    var randomResult = (((Math.floor(Math.random() * 100)) % 2) === 0);
 
+    $scope.answer1 = randomResult ? localQuestion.answer1 : localQuestion.answer2;
+    $scope.answer2 = randomResult ? localQuestion.answer2 : localQuestion.answer1;
+    $scope.answer1correct = randomResult;
+    $scope.answer2correct = !randomResult;
   };
 
   $scope.getNextQuestion();
