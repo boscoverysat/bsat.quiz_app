@@ -4,13 +4,7 @@ app.service('questionsService', function(){
   this.getQuestion = function() {
     var questionIndex = Math.floor(Math.random() * this.questions.length);
 
-    console.log('questionIndex: ' + questionIndex);
-
     return this.questions[questionIndex];
-  };
-
-  this.getQuestions = function() {
-    return this.questions;
   };
 
   this.questions = [

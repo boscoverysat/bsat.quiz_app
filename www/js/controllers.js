@@ -1,13 +1,6 @@
 var appCtrl = angular.module('mainController', []);
 
 appCtrl.controller('AppCtrl', function($scope, $controller) {
-  var questions = $scope.$new();
-
-  $controller('QuestionsController', {$scope: questions});
-
-  $scope.getNextQuestion_1 = function() {
-    questions.getNextQuestion();
-  };
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.

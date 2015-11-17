@@ -1,4 +1,4 @@
-app.controller('QuestionsController', ['$scope', 'questionsService', function($scope, questionsService) {
+app.controller('QuestionsController', ['$scope', 'questionsService', 'dbService', function($scope, questionsService, dbService) {
   'use strict';
 
   $scope.checkAnswer = function(isCorrect) {
@@ -19,17 +19,17 @@ app.controller('QuestionsController', ['$scope', 'questionsService', function($s
 
   $scope.increaseCorrectQuestions = function() {
     $scope.correctQuestions++;
-    // TODO: Guardar en BBDD.
+    dbService.updateCorrectQuestions($scope.correctQuestions);
   };
 
   $scope.increaseWrongQuestions = function() {
     $scope.wrongQuestions++;
-    // TODO: Guardar en BBDD.
+    dbService.updateWrongQuestions($scope.wrongQuestions);
   };
 
   $scope.increaseTotalQuestions = function() {
     $scope.totalQuestions++;
-    // TODO: Guardar en BBDD.
+    dbService.updateTotalQuestions($scope.totalQuestions);
   };
 
   $scope.getCorrectQuestions = function() {
@@ -65,7 +65,7 @@ app.controller('QuestionsController', ['$scope', 'questionsService', function($s
     $scope.answer2correct = !randomResult;
   };
 
-  $scope.$on('$ionicView.beforeEnter', function(event) {
+  $scope.$on('$ionicView.beforeEnter', function() {
     $scope.getNextQuestion();
 
     $scope.correctQuestions = $scope.getCorrectQuestions();
