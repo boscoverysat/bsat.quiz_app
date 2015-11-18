@@ -8,7 +8,7 @@ var db = null;
 
 var app = angular.module('starter', ['ionic', 'mainController', 'bsat.db.service', 'ngCordova']);
 
-app.run(function($ionicPlatform, $cordovaSQLite) {
+app.run(function($ionicPlatform, $timeout, $cordovaSQLite) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -22,18 +22,65 @@ app.run(function($ionicPlatform, $cordovaSQLite) {
       StatusBar.styleDefault();
     }
 
-    if(window.cordova) {
-      // App syntax
-      db = $cordovaSQLite.openDB("boscoverysat.db");
-      console.log('Creating DB by App');
-    } else {
-      // Ionic serve syntax
-      db = window.openDatabase("boscoverysat.db", "1.0", "BoscoverySAT", -1);
-      console.log('Creating DB by Browser');
-    }
+    // $timeout(function() {
+      console.log('Creatin DB');
 
-    $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS questionCounter (id integer primary key, correct integer, wrong integer, total integer)");
-    $cordovaSQLite.execute(db, "INSERT INTO questionCounter (id, correct, wrong, total) VALUES (1, 0, 0, 0)");
+      var query = "CREATE TABLE IF NOT EXISTS questionCounter (id integer primary key, correct integer, wrong integer, total integer)";
+
+      if(window.cordova) {
+        // App syntax
+        db = $cordovaSQLite.openDB({ name: "bsat.db", bgType: 1 });
+      } else {
+        // Ionic serve syntax
+        db = window.openDatabase("boscoverysat.db", "1.0", "BoscoverySAT", 1000);
+      }
+
+      $cordovaSQLite
+        .execute(db, query, [])
+        .then(
+          function() {
+            console.log("Table create correctly.");
+
+            query = "INSERT INTO questionCounter (correct, wrong, total) VALUES (0, 0, 0)";
+
+            $cordovaSQLite
+              .execute(db, query, [])
+              .then(
+                function() {
+                  console.log("Data inserted correctly.");
+                },
+                function (err) {
+                  console.error(err);
+                }
+              );
+          },
+          function (err) {
+            console.error(err);
+          }
+        );
+    // }, 2000);
+
+
+    // if(window.cordova) {
+    //   // App syntax
+    //   db = $cordovaSQLite.openDB("boscoverysat.db");
+    //   console.log('Creating DB by App');
+    // } else {
+    //   // Ionic serve syntax
+    //   db = window.openDatabase("boscoverysat.db", "1.0", "BoscoverySAT", -1);
+    //   console.log('Creating DB by Browser');
+    // }
+
+    // $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS questionCounter (id integer primary key, correct integer, wrong integer, total integer)")
+    //               .then(
+    //                 function() {
+    //                   $cordovaSQLite.execute(db, "INSERT INTO questionCounter (id, correct, wrong, total) VALUES (1, 0, 0, 0)");
+    //                 },
+    //                 function(err) {
+    //                   console.log(err);
+    //                 }
+    //               );
+
   });
 });
 
