@@ -4,9 +4,11 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-var app = angular.module('starter', ['ionic', 'mainController', 'ngCordova']);
+var db = null;
 
-app.run(function($ionicPlatform) {
+var app = angular.module('starter', ['ionic', 'mainController', 'bsat.db.service', 'ngCordova']);
+
+app.run(function($ionicPlatform, $cordovaSQLite) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -19,6 +21,19 @@ app.run(function($ionicPlatform) {
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
+    if(window.cordova) {
+      // App syntax
+      db = $cordovaSQLite.openDB("boscoverysat.db");
+      console.log('Creating DB by App');
+    } else {
+      // Ionic serve syntax
+      db = window.openDatabase("boscoverysat.db", "1.0", "BoscoverySAT", -1);
+      console.log('Creating DB by Browser');
+    }
+
+    $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS questionCounter (id integer primary key, correct integer, wrong integer, total integer)");
+    $cordovaSQLite.execute(db, "INSERT INTO questionCounter (id, correct, wrong, total) VALUES (1, 0, 0, 0)");
   });
 });
 
