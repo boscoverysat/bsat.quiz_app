@@ -22,65 +22,60 @@ app.run(function($ionicPlatform, $timeout, $cordovaSQLite) {
       StatusBar.styleDefault();
     }
 
-    // $timeout(function() {
-      console.log('Creatin DB');
+    console.log('Creatin DB');
 
-      var query = "CREATE TABLE IF NOT EXISTS questionCounter (id integer primary key, correct integer, wrong integer, total integer)";
+    var query = null;
 
-      if(window.cordova) {
-        // App syntax
-        db = $cordovaSQLite.openDB({ name: "bsat.db", bgType: 1 });
-      } else {
-        // Ionic serve syntax
-        db = window.openDatabase("boscoverysat.db", "1.0", "BoscoverySAT", 1000);
-      }
+    if(window.cordova) {
+      // App syntax
+      db = $cordovaSQLite.openDB({ name: "boscoverysat.db", bgType: 1 });
+    } else {
+      // Ionic serve syntax
+      db = window.openDatabase("boscoverysat.db", "1.0", "BoscoverySAT", 1000);
+    }
 
-      $cordovaSQLite
-        .execute(db, query, [])
-        .then(
-          function() {
-            console.log("Table create correctly.");
+    query = "CREATE TABLE IF NOT EXISTS questionCounter (id integer primary key, correct integer, wrong integer, total integer)";
 
-            query = "INSERT INTO questionCounter (correct, wrong, total) VALUES (0, 0, 0)";
+    $cordovaSQLite
+      .execute(db, query, [])
+      .then(
+        function() {
+          console.log("Table create correctly.");
 
-            $cordovaSQLite
-              .execute(db, query, [])
-              .then(
-                function() {
-                  console.log("Data inserted correctly.");
-                },
-                function (err) {
-                  console.error(err);
+          query = "SELECT COUNT(*) AS quantity FROM questionCounter";
+
+          $cordovaSQLite
+            .execute(db, query, [])
+            .then(
+              function(data) {
+                console.log("Data result: " + JSON.stringify(data.rows.item(0).quantity));
+
+                if (data.rows.item(0).quantity === 0) {
+                  console.log('Database already initialized.');
+
+                  query = "INSERT INTO questionCounter (correct, wrong, total) VALUES (0, 0, 0)";
+
+                  $cordovaSQLite
+                    .execute(db, query, [])
+                    .then(
+                      function() {
+                        console.log("Database correctly initialized.");
+                      },
+                      function (err) {
+                        console.error("Error initializing database. " + err);
+                      }
+                    );
                 }
-              );
-          },
-          function (err) {
-            console.error(err);
-          }
-        );
-    // }, 2000);
-
-
-    // if(window.cordova) {
-    //   // App syntax
-    //   db = $cordovaSQLite.openDB("boscoverysat.db");
-    //   console.log('Creating DB by App');
-    // } else {
-    //   // Ionic serve syntax
-    //   db = window.openDatabase("boscoverysat.db", "1.0", "BoscoverySAT", -1);
-    //   console.log('Creating DB by Browser');
-    // }
-
-    // $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS questionCounter (id integer primary key, correct integer, wrong integer, total integer)")
-    //               .then(
-    //                 function() {
-    //                   $cordovaSQLite.execute(db, "INSERT INTO questionCounter (id, correct, wrong, total) VALUES (1, 0, 0, 0)");
-    //                 },
-    //                 function(err) {
-    //                   console.log(err);
-    //                 }
-    //               );
-
+              },
+              function (err) {
+                console.error("Error counting stored records. " + err);
+              }
+            );
+        },
+        function (err) {
+          console.error("Error creating table. " + err);
+        }
+      );
   });
 });
 
