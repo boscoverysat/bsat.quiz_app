@@ -96,7 +96,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
       }
     })
     .state('app.quiz', {
-      // cache: false,
       url: '/quiz',
       views: {
         'menuContent': {
@@ -106,7 +105,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
       }
     })
     .state('app.score', {
-      cache: false,
+      // cache: false,
       url: '/score',
       views: {
         'menuContent': {

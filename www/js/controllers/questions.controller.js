@@ -13,39 +13,19 @@ app.controller('QuestionsController', ['$scope', 'questionsService', 'dbService'
     }
 
     $scope.showAnswerButton = false;
-    $scope.increaseTotalQuestions();
     $scope.showExplanation = true;
   };
 
   $scope.increaseCorrectQuestions = function() {
     $scope.correctQuestions++;
-    dbService.updateCorrectQuestions($scope.correctQuestions);
+    $scope.totalQuestions++;
+    dbService.updateCorrectQuestions($scope.correctQuestions, $scope.totalQuestions);
   };
 
   $scope.increaseWrongQuestions = function() {
     $scope.wrongQuestions++;
-    dbService.updateWrongQuestions($scope.wrongQuestions);
-  };
-
-  $scope.increaseTotalQuestions = function() {
     $scope.totalQuestions++;
-    dbService.updateTotalQuestions($scope.totalQuestions);
-    dbService.getScores();
-  };
-
-  $scope.getCorrectQuestions = function() {
-    // TODO: Obtener candidad desde BBDD.
-    return 0;
-  };
-
-  $scope.getWrongQuestions = function() {
-    return 0;
-    // TODO: Obtener candidad desde BBDD.
-  };
-
-  $scope.getTotalQuestions = function() {
-    return 0;
-    // TODO: Obtener candidad desde BBDD.
+    dbService.updateWrongQuestions($scope.wrongQuestions, $scope.totalQuestions);
   };
 
   $scope.getNextQuestion = function() {
