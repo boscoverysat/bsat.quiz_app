@@ -4,9 +4,10 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-var db = null;
+var db = null,
+    query = null;
 
-var app = angular.module('starter', ['ionic', 'mainController', 'bsat.db.service', 'ngCordova']);
+var app = angular.module('starter', ['ionic', 'mainController', 'ngCordova']);
 
 app.run(function($ionicPlatform, $timeout, $cordovaSQLite) {
   $ionicPlatform.ready(function() {
@@ -23,8 +24,6 @@ app.run(function($ionicPlatform, $timeout, $cordovaSQLite) {
     }
 
     console.log('Creatin DB');
-
-    var query = null;
 
     if(window.cordova) {
       // App syntax

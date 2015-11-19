@@ -30,6 +30,7 @@ app.controller('QuestionsController', ['$scope', 'questionsService', 'dbService'
   $scope.increaseTotalQuestions = function() {
     $scope.totalQuestions++;
     dbService.updateTotalQuestions($scope.totalQuestions);
+    dbService.getScores();
   };
 
   $scope.getCorrectQuestions = function() {
@@ -66,10 +67,18 @@ app.controller('QuestionsController', ['$scope', 'questionsService', 'dbService'
   };
 
   $scope.$on('$ionicView.beforeEnter', function() {
-    $scope.getNextQuestion();
+    dbService
+      .getScores()
+      .then(
+        function(result) {
+          var scores =  result.rows.item(0);
 
-    $scope.correctQuestions = $scope.getCorrectQuestions();
-    $scope.wrongQuestions = $scope.getWrongQuestions();
-    $scope.totalQuestions = $scope.getTotalQuestions();
+          $scope.getNextQuestion();
+
+          $scope.correctQuestions = scores.correct;
+          $scope.wrongQuestions = scores.wrong;
+          $scope.totalQuestions = scores.total;
+        }
+      );
   });
 }]);

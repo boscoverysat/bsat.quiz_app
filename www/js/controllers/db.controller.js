@@ -1,24 +1,36 @@
 app.controller('DBController', ['$rootScope', '$scope', '$cordobaSQLite', function($rootScope, $scope, $cordobaSQLite) {
   'use strict';
 
-  var db = $cordovaSQLite.openDB({ name: "bsat.db", bgType: 1 });
+  var db = null,
+      query = null;
 
-  $scope.init = function() {
-    var query = "CREATE TABLE IF NOT EXISTS questionCounter (id integer primary key, correct integer, wrong integer, total integer)";
-    $cordovaSQLite
-      .execute(db, query, [])
-      .then(
-        function() {
-          console.log("Table create correctly.");
-        },
-        function (err) {
-          console.error(err);
-        }
-      );
+  this.init = function() {
+    if(window.cordova) {
+      // App syntax
+      db = $cordovaSQLite.openDB({ name: "boscoverysat.db", bgType: 1 });
+    } else {
+      // Ionic serve syntax
+      db = window.openDatabase("boscoverysat.db", "1.0", "BoscoverySAT", 1000);
+    }
   };
 
-  $rootScope.initDB = function(source) {
-    console.log('Initiating DB from ' + source);
+  $scope.getScores = function() {
+    // this.init();
+
+    // query = "SELECT * FROM questionCounter ORDER BY id LIMIT 1";
+
+    // $cordovaSQLite
+    //   .execute(db, query, [])
+    //   .then(
+    //     function(data) {
+    //       console.log("Obtained data: " + JSON.stringify(data.rows));
+    //     },
+    //     function (err) {
+    //       console.error("Error reading database. " + err);
+    //     }
+    //   );
+
+    console.log('Getting DB scores');
   };
 
   // $scope.execute = function() {
